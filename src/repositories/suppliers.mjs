@@ -11,6 +11,21 @@ export async function getAllSuppliers() {
     return result.rows;
 }
 
+// FUNCTION - Get a single supplier by id
+export async function getSupplierById(id) {
+    const result = await pool.query(
+        `SELECT id, name, contact_person, email, phone, country
+        FROM suppliers WHERE id = $1`,
+        [id]
+    );
+
+    if (!result.rows || result.rows.length === 0) {
+        return null;
+    }
+
+    return result.rows[0];
+}
+
 // FUNCTION - Create a new supplier
 export async function createSupplier(name, contact_person, email, phone, country) {
     const result = await pool.query(

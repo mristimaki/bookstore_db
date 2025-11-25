@@ -15,6 +15,24 @@ router.get("/", async (req, res) => {
     }
 });
 
+// GET /suppliers/:id - Fetch a specifik supplier by id
+router.get("/:id", async (req, res) => {
+    const supplierId = Number.parseInt(req.params.id);
+
+    try {
+        const supplier = await suppliersRepo.getSupplierById(supplierId);
+
+        if (!supplier) {
+        return res.status(404).json({ error: "Supplier not found" });
+        }
+        
+        res.status(200).json(supplier);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Failed to fetch supplier" });
+    }
+});
+
 // POST /suppliers - Create new supplier
 router.post("/", async (req, res) => {
     try {
