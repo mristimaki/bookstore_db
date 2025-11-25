@@ -56,3 +56,17 @@ export async function updateSupplier(id, name, contact_person, email, phone, cou
 
     return result.rows[0];
 }
+
+// DELETE Supplier by id
+export async function deleteSupplier(id) {
+    const result = await pool.query(
+        `DELETE FROM suppliers WHERE id = $1 RETURNING *`,
+        [id]
+    );
+
+    if (result.rowCount !== 1) {
+        return null;
+    }
+
+    return result.rows[0];
+}

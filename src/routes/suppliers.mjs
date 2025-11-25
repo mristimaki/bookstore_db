@@ -82,12 +82,30 @@ router.put("/:id", async (req, res) => {
         );
 
         if (!updateSupplier) {
-            return res.status(404).json({ error: "Supplier not found"});
+            return res.status(404).json({ error: "Supplier not found" });
         }
 
         res.status(200).json(updateSupplier);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Failed to update supplier" });
+    }
+});
+
+// DELETE /suppliers/:id
+router.delete('/:id', async (req, res) => {
+    const supplierId = Number.parseInt(req.params.id);
+    
+    try {
+        const deletedSupplier = await suppliersRepo.deleteSupplier(supplierId);
+
+        if (!deletedSupplier) {
+            return res.status(404).json({ error: "Supplier not found" });
+        }
+
+        res.status(200).json(deletedSupplier);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Failed to delete supplier" });
     }
 });
