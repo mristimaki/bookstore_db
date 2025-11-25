@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
         if (!supplier) {
         return res.status(404).json({ error: "Supplier not found" });
         }
-        
+
         res.status(200).json(supplier);
     } catch (error) {
         console.log(error);
@@ -56,5 +56,38 @@ router.post("/", async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Failed to create supplier." });
+    }
+});
+
+// PUT /suppliers/:id - Update existing supplier
+router.put("/:id", async (req, res) => {
+    const supplierId = Number.parseInt(req.params.id);
+
+    try {
+        const errors = validateSupplier(req.body);
+
+        if (errors.length > 0) {
+            return res.status(400).json({ errors });
+        }
+
+        const { name, contact_person, email, phone, country } = req.body;
+
+        const updateSupplier = await suppliersRepo.updateSupplier(
+            supplierId,
+            name,
+            contact_person,
+            email,
+            phone,
+            country
+        );
+
+        if (!updateSupplier) {
+            return res.status(404).json({ error: "Supplier not found"});
+        }
+
+        res.status(200).json(updateSupplier);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Failed to update supplier" });
     }
 });
