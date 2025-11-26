@@ -1,5 +1,5 @@
 import express from "express";
-import * as productRepo from "../repositories/products.mjs";
+import * as productsRepo from "../repositories/products.mjs";
 import { validateProduct } from "../utilities/validation.mjs";
 
 export const router = express.Router();
@@ -7,7 +7,7 @@ export const router = express.Router();
 // GET /products 
 router.get("/", async (req, res) => {
     try {
-        const products = await productRepo.getAllProducts();
+        const products = await productsRepo.getAllProducts();
         res.status(200).json(products);
     } catch (error) {
         console.log(error);
@@ -20,7 +20,7 @@ router.get("/:id", async (req, res) => {
     const productId = Number.parseInt(req.params.id);
 
     try {
-        const product = await productRepo.getProductById(productId);
+        const product = await productsRepo.getProductById(productId);
 
         if (!product) {
             return res.status(404).json({ error: "Product not found" });
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
 
         const { title, author, quantity, price, category, supplier_id } = req.body;
 
-        const newProduct = await productRepo.createProduct(
+        const newProduct = await productsRepo.createProduct(
             title,
             author,
             Number.parseInt(quantity),
@@ -77,12 +77,12 @@ router.put("/:id", async (req, res) => {
 
         const { title, author, quantity, price, category, supplier_id } = req.body;
 
-        const updateProduct = await productRepo.updateProduct(
+        const updateProduct = await productsRepo.updateProduct(
             productId,
             title,
             author,
             Number.parseInt(quantity),
-            Number.parseInt(price),
+            Number.parseFloat(price),
             category,
             Number.parseInt(supplier_id)
         );
@@ -100,5 +100,23 @@ router.put("/:id", async (req, res) => {
         }
 
         res.status(500).json({ error: "Failed to update product" });
+    }
+});
+
+// DELETE /products/:id
+router.delete('/:id', async (req, res) => {
+    const productId = Number.parseInt(req.params.id);
+
+    try {
+        const deletedProduct = await productsRepo.deleteProduct(productId);
+
+        if (!deletedProduct) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        res.status(200).json(deletedProduct);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Failed to delete product" });
     }
 });
