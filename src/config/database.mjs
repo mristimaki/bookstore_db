@@ -28,6 +28,21 @@ export async function databaseSetup() {
         `);
         console.log("Suppliers table ready");
 
+        // PRODUCTS TABLE
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS products (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            author VARCHAR(255) NOT NULL,
+            quantity INT NOT NULL DEFAULT 0,
+            price NUMERIC(10, 2) NOT NULL,
+            category VARCHAR(100) NOT NULL,
+            supplier_id INT NOT NULL REFERENCES suppliers(id),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+        console.log("Products table ready");
+
         console.log("Database is ready to use!");
     } catch (error) {
         console.log(error);
