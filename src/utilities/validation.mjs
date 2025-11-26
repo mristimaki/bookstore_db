@@ -25,7 +25,43 @@ export function validateSupplier(data) {
         errors.push('Country is required');
     }
 
-    return errors; // Empty array if everything is OK
+    return errors;
 }
 
-// FUNCTION - Product validation will come here later..
+// FUNCTION - Validates products data
+export function validateProduct(data) {
+    const errors = [];
+
+    // Checks if title exists and is not empty
+    if (!data.title || data.title.trim() === '') {
+        errors.push('Title is required');
+    }
+
+    // Checks if author exists and is not empty
+    if (!data.author || data.author.trim() === '') {
+        errors.push('Author is required');
+    }
+
+    // Checks if quantity exixts and is a valid number
+    if (data.quantity === undefined || data.quantity === null) {
+        errors.push('Quantity is required');
+    } else if (typeof data.quantity !== 'number' || isNaN(data.quantity)) {
+        errors push('Quantity must be a valid number');
+    } else if (data.quantity < 0) {
+        errors.push('Quantity cannot be negative');
+    }
+
+    // Checks if price exists and is not empty
+    if (!data.category || data.category.trim() === '') {
+        errors.push('Category is required');
+    }
+
+    // Checks if supplier_id exixts and is a valid number
+    if (data.supplier_id === undefined || data.supplier_id === null) {
+        errors.push('Supplier ID is required');
+    } else if (typeof data.supplier_id !== 'number' || isNaN(data.supplier_id)) {
+        errors.push('Supplier ID must be a valid number');
+    }
+
+    return errors;
+}

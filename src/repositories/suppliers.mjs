@@ -26,7 +26,7 @@ export async function getSupplierById(id) {
         FROM suppliers 
         LEFT JOIN products ON suppliers.id = products.supplier_id
         WHERE suppliers.id = $1
-        GROUP BY suppliers.id`
+        GROUP BY suppliers.id`,
         [id]
     );
 

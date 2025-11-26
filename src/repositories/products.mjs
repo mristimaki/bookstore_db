@@ -51,3 +51,19 @@ export async function getProductById(id) {
 
     return result.rows[0];
 }
+
+// CREATE Product
+export async function createProduct(title, author, quantity, price, category, supplier_id) {
+    const result = await pool.query(
+        `INSERT INTO products (title, author, quantity, price, category, supplier_id)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *`,
+        [title, author, quantity, price, category, supplier_id]
+    );
+
+    if (result.rowCount !== 1) {
+        throw new Error("Failed to create supplier");
+    }
+
+    return result.rows[0];
+};
