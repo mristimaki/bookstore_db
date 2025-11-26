@@ -67,3 +67,22 @@ export async function createProduct(title, author, quantity, price, category, su
 
     return result.rows[0];
 };
+
+// PUT /products/:id - Update existing product
+export async function updateProduct(id, title, author, quantity, price, category, supplier_id) {
+    const result = await pool.query(
+        `UPDATE products
+        SET title = $1, author = $2, quantity = $3, price = $4, category = $5, supplier_id = $6
+        WHERE id = $7
+        RETURNING *`,
+        [title, author, quantity, price, category, supplier_id, id]
+    );
+
+    if (result.rowCount !== 1) {
+        return null;
+    }
+
+    return result.rows[0];
+}
+
+// DELETE /products/:id - Delete existing product

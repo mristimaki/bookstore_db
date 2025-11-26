@@ -46,7 +46,7 @@ export function validateProduct(data) {
     if (data.quantity === undefined || data.quantity === null) {
         errors.push('Quantity is required');
     } else if (typeof data.quantity !== 'number' || isNaN(data.quantity)) {
-        errors.push('Quantity must be a valid number');
+        errors.push('Quantity must be a number (without quotes)');
     } else if (data.quantity < 0) {
         errors.push('Quantity cannot be negative');
     }
@@ -55,7 +55,7 @@ export function validateProduct(data) {
     if (data.price === undefined || data.price === null) {
         errors.push('Price is required');
     } else if (typeof data.price !== 'number' || isNaN(data.price)) {
-        errors.push('Price must be a valid number');
+        errors.push('Price must be a number (without quotes)');
     } else if (data.price < 0) {
         errors.push('Price cannot be negative');
     }

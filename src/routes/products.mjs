@@ -63,3 +63,42 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Failed to create product" });
     }
 });
+
+// PUT /products/:id - Update existing product
+router.put("/:id", async (req, res) => {
+    const productId = Number.parseInt(req.params.id);
+
+    try {
+        const errors = validateProduct(req.body);
+
+        if (errors.length > 0) {
+            return res.status(400).json({ errors });
+        }
+
+        const { title, author, quantity, price, category, supplier_id } = req.body;
+
+        const updateProduct = await productRepo.updateProduct(
+            productId,
+            title,
+            author,
+            Number.parseInt(quantity),
+            Number.parseInt(price),
+            category,
+            Number.parseInt(supplier_id)
+        );
+
+        if (!updateProduct) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        res.status(200).json(updateProduct);
+    } catch (error) {
+        console.log(error);
+
+        if (error.message && error.message.includes('foreign key')) {
+            return res.status(400).json({ error: "Supplier does not exist" });
+        }
+
+        res.status(500).json({ error: "Failed to update product" });
+    }
+});
