@@ -42,21 +42,30 @@ export function validateProduct(data) {
         errors.push('Author is required');
     }
 
-    // Checks if quantity exixts and is a valid number
+    // Checks if quantity exists and is a valid number
     if (data.quantity === undefined || data.quantity === null) {
         errors.push('Quantity is required');
     } else if (typeof data.quantity !== 'number' || isNaN(data.quantity)) {
-        errors push('Quantity must be a valid number');
+        errors.push('Quantity must be a valid number');
     } else if (data.quantity < 0) {
         errors.push('Quantity cannot be negative');
     }
 
-    // Checks if price exists and is not empty
+    // Checks if price exists and is a valid number
+    if (data.price === undefined || data.price === null) {
+        errors.push('Price is required');
+    } else if (typeof data.price !== 'number' || isNaN(data.price)) {
+        errors.push('Price must be a valid number');
+    } else if (data.price < 0) {
+        errors.push('Price cannot be negative');
+    }
+
+    // Checks if category exists and is not empty
     if (!data.category || data.category.trim() === '') {
         errors.push('Category is required');
     }
 
-    // Checks if supplier_id exixts and is a valid number
+    // Checks if supplier_id exists and is a valid number
     if (data.supplier_id === undefined || data.supplier_id === null) {
         errors.push('Supplier ID is required');
     } else if (typeof data.supplier_id !== 'number' || isNaN(data.supplier_id)) {
