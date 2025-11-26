@@ -4,7 +4,7 @@ import { validateSupplier } from "../utilities/validation.mjs";
 
 export const router = express.Router();
 
-// GET /suppliers - Fetch all suppliers
+// GET /suppliers
 router.get("/", async (req, res) => {
     try {
         const suppliers = await suppliersRepo.getAllSuppliers();
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET /suppliers/:id - Fetch a specifik supplier by id
+// GET /suppliers/:id - Get supplier by id
 router.get("/:id", async (req, res) => {
     const supplierId = Number.parseInt(req.params.id);
 

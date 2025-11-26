@@ -2,11 +2,13 @@ import "./config/variables.mjs"; // MÅSTE vara först så att .env laddas innan
 import express from "express";
 import { databaseSetup } from "./config/database.mjs";
 import { router as suppliersRouter } from "./routes/suppliers.mjs";
+import { router as productsRouter } from "./routes/products.mjs";
 
 const app = express();
 
 app.use(express.json());
-app.use("/suppliers", suppliersRouter);
+app.use("/api/suppliers", suppliersRouter);
+app.use("/api/products", productsRouter);
 
 const PORT = process.env.SERVER_PORT || 3000;
 

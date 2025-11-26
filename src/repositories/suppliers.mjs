@@ -1,6 +1,6 @@
 import { pool } from "../config/database.mjs";
 
-// GET Suppliers
+// GET all Suppliers
 export async function getAllSuppliers() {
     const result = await pool.query("SELECT * FROM suppliers");
 
