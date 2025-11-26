@@ -23,7 +23,7 @@ router.get("/:id", async (req, res) => {
         const supplier = await suppliersRepo.getSupplierById(supplierId);
 
         if (!supplier) {
-        return res.status(404).json({ error: "Supplier not found" });
+            return res.status(404).json({ error: "Supplier not found" });
         }
 
         res.status(200).json(supplier);

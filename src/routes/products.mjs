@@ -12,4 +12,21 @@ router.get("/", async (req, res) => {
         console.log(error);
         res.status(500).json({ error: "Failed to fetch products"});
     }
-})
+});
+
+// GET /products/:id - Get product by id
+router.get("/:id", async (req, res) => {
+    const productId = Number.parseInt(req.params.id);
+
+    try {
+        const product = await productRepo.getProductById(productId);
+
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        res.status(200).json(product);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch product" });
+    }
+});

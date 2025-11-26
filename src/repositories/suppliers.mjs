@@ -14,8 +14,19 @@ export async function getAllSuppliers() {
 // GET Supplier by id
 export async function getSupplierById(id) {
     const result = await pool.query(
-        `SELECT id, name, contact_person, email, phone, country
-        FROM suppliers WHERE id = $1`,
+        `SELECT
+            suppliers.id,
+            suppliers.name,
+            suppliers.contact_person,
+            suppliers.email,
+            suppliers.phone,
+            suppliers.country,
+            suppliers.created_at,
+            COUNT(products.id) AS product_count
+        FROM suppliers 
+        LEFT JOIN products ON suppliers.id = products.supplier_id
+        WHERE suppliers.id = $1
+        GROUP BY suppliers.id`
         [id]
     );
 
