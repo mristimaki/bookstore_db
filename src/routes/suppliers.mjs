@@ -1,5 +1,6 @@
 import express from "express";
 import * as suppliersRepo from "../repositories/suppliers.mjs"; // Detta gör så att jag inte behöver uppdatera listan om jag lägger till något nytt
+import * as productsRepo from "../repositories/products.mjs";
 import { validateSupplier } from "../utilities/validation.mjs";
 
 export const router = express.Router();
@@ -30,6 +31,25 @@ router.get("/:id", async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Failed to fetch supplier" });
+    }
+});
+
+// GET /suppliers/:id/products
+router.get("/:id/products", async (req, res) => {
+    const supplierId = Number.parseInt(req.params.id);
+    
+    try {
+        const supplier = await suppliersRepo.getSupplierById(supplierId);
+
+        if (!supplier) {
+            return res.status(404).json({ error: "Supplier not found" });
+        }
+
+        const products = await productsRepo.getProductsBySupplierId(supplierId);
+        res.status(200).json(products);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Failed to fetch supplier products" });
     }
 });
 

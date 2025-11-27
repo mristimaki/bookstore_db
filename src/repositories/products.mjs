@@ -52,6 +52,30 @@ export async function getProductById(id) {
     return result.rows[0];
 }
 
+// GET Products by supplier id
+export async function getProductsBySupplierId(supplierId) {
+    const result = await pool.query(
+        `SELECT
+            products.id,
+            products.title,
+            products.author,
+            products.quantity,
+            products.price,
+            products.category,
+            products.created_at,
+            suppliers.name AS supplier_name,
+            suppliers.country AS supplier_country,
+            suppliers.id AS supplier_id
+        FROM products
+        LEFT JOIN suppliers ON products.supplier_id = suppliers.id
+        WHERE products.supplier_id = $1
+        ORDER BY products.id`,
+        [supplierId]
+    );
+
+    return result.rows;
+}
+
 // CREATE Product
 export async function createProduct(title, author, quantity, price, category, supplier_id) {
     const result = await pool.query(
