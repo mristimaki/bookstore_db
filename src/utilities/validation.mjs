@@ -69,7 +69,7 @@ export function validateProduct(data) {
     if (data.supplier_id === undefined || data.supplier_id === null) {
         errors.push('Supplier ID is required');
     } else if (typeof data.supplier_id !== 'number' || isNaN(data.supplier_id)) {
-        errors.push('Supplier ID must be a valid number');
+        errors.push('Supplier ID must be number (without quotes)');
     }
 
     return errors;
