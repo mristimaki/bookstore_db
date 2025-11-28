@@ -1,5 +1,4 @@
 // FUNCTION - Validates supplier data
-// Returns array of error messages, if empty = everything is OK!
 export function validateSupplier(data) {
     const errors = [];
 

@@ -1,4 +1,4 @@
-import "./config/variables.mjs"; // MÅSTE vara först så att .env laddas innan någon annan kod körs
+import "./config/variables.mjs";
 import express from "express";
 import { databaseSetup } from "./config/database.mjs";
 import { router as suppliersRouter } from "./routes/suppliers.mjs";
