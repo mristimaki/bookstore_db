@@ -1,8 +1,11 @@
 # Islamic Bookstore - Inventory Management System
 
 **Student:** [Maryam Rutqvist Ristimäki]
+
 **Program:** [EC Utbildning / Frontend Developer]
+
 **Course:** Backend Development 1
+
 **Date:** [November 2025]
 
 ---
