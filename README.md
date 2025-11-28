@@ -1,12 +1,12 @@
 # Islamic Bookstore - Inventory Management System
 
-**Student:** *Maryam Rutqvist Ristimäki*
+**Student:** Maryam Rutqvist Ristimäki
 
-**Program:** *EC Utbildning / Frontend Developer*
+**Program:** EC Utbildning / Frontend Developer
 
-**Course:** *Backend Development 1*
+**Course:** Backend Development 1
 
-**Date:** *November 2025*
+**Date:** November 2025
 
 ---
 
@@ -221,6 +221,56 @@ CREATE TABLE IF NOT EXISTS products (
 
 ## 🚀 How to Run This Project
 
+### **Prereqisites**
+- Node.js installed
+- Docker installed
+- PostgreSQL running (via Docker)
+
+### **Setup Steps**
+
+1. **Clone the repository**
+```bash
+git clone [repository-url]
+cd islamisk-bokhandel
+```
+
+2. **Install dependencies**
+```bash
+npm install express pg dotenv
+```
+
+3. **Create .env file**
+```env
+# SERVER
+SERVER_HOST="localhost"
+SERVER_PORT="3000"
+
+# DATABASE
+DB_USER="postgres"
+DB_PASSWORD="your_password"
+DB_PORT="5432"
+DB_NAME="your_db_name"
+```
+
+4. **Start PostgreSQL with Docker**
+```bash
+docker start your-postgres
+docker exec -it your-postgres bash
+psql -U postgres
+```
+
+5. **Start the server**
+```bash
+node src/main.mjs
+```
+### **Testing the API**
+
+Use Bruno or any REST client to test endpoints:
+
+**Base URL:** `http://localhost:3000/api`
+
+---
+
 ## Example Data
 
 ### **Create a Supplier**
@@ -247,6 +297,7 @@ POST /api/products
     "supplier_id": 1
 }
 ```
+---
 
 ## 🎓 Reflection
 This project taught me that **reading tutorials isn't enough - you need to practice**. I read documentation and watched countless videos, but I still restarted my entire project maybe 5 times because I didn't understand how everything connected. Which files first? What order for installations? It wasn't until I got clear guidance AND started actually writing code - practicing over and over - that things finally clicked.
@@ -266,7 +317,9 @@ Finally, **good error messages** helped me debug faster and made the API easier 
 ## Contact
 
 *Maryam Rutqvist Ristimäki*
+
 [GitHub](https://github.com/mristimaki)
+
 [LinkedIn](https://www.linkedin.com/in/maryam-rutqvist-ristim%C3%A4ki-08b41438b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bc7R1WAZ8S1S8%2FAaSWoQiLg%3D%3D)
 
 ---
