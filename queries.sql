@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS suppliers (
     name VARCHAR(255) NOT NULL,
     contact_person VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    phone VARCHAR(100) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
     country VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
