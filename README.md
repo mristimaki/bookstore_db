@@ -6,14 +6,14 @@ An **Inventory Management System** for an Islamic bookstore built with Node.js, 
 
 ## 📋 Table of Contents
 
-- [Features](##features)
-- [Tech Stack](##tech-stack)
-- [Database Schema](##database-schema)
-- [API Endpoints](##api-endpoints)
-- [Project Structure](##project-structure)
-- [Installation & Setup](##installation--setup)
-- [Usage Examples](##usage-examples)
-- [Author](##author)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Database Schema](#database-schema)
+- [API Endpoints](#api-endpoints)
+- [Project Structure](#project-structure)
+- [Installation & Setup](#installation--setup)
+- [Usage Examples](#usage-examples)
+- [Author](#author)
 
 ---
 
