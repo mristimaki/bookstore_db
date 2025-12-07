@@ -123,7 +123,10 @@ router.delete('/:id', async (req, res) => {
             return res.status(404).json({ error: "Supplier not found" });
         }
 
-        res.status(200).json(deletedSupplier);
+        res.status(200).json({
+            message: "Supplier deleted successfully",
+            supplier: deletedSupplier
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Failed to delete supplier" });
