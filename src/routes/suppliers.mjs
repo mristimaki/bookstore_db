@@ -1,5 +1,5 @@
 import express from "express";
-import * as suppliersRepo from "../repositories/suppliers.mjs"; // Detta gör så att jag inte behöver uppdatera listan om jag lägger till något nytt
+import * as suppliersRepo from "../repositories/suppliers.mjs";
 import * as productsRepo from "../repositories/products.mjs";
 import { validateSupplier } from "../utilities/validation.mjs";
 
